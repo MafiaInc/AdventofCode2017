@@ -27,30 +27,48 @@ void main() {
 
    int c;
    int sum = 0;
-   int first = -1;
-   int current;
+   int array[2200];
+   int num = 0;
+   array[0] = -1;
 
    while (isdigit((c = getchar())))
    {
-      if (first < 0)
+      if (array[0] < 0)
       {
-         first = c;
-         current = first;
+         array[0] = c;
+         num++;
          continue;
       }
 
-      if (current == c)
+      if (array[num-1] == c)
       {
          sum += c-'0';
       }
 
-      current = c;
+      array[num] = c;
+      num++;
    }
 
-   if (first == current)
+   if (array[0] == array[num-1])
    {
-      sum += current-'0';
+      sum += array[0]-'0';
    }
 
    printf("Part I sum is : %d\n", sum);
+
+   /* Part II */
+
+   c = sum = 0;
+   while (c != (num/2))
+   {
+      if (array[c] == array[(c+num/2)])
+      {
+         sum += (array[c]-'0')*2;
+      }
+
+      c++;
+   }
+
+   printf("Part II sum is : %d\n", sum);
+   printf("Number of digits processed : %d\n", num);
 }
